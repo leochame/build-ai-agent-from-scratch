@@ -11,10 +11,14 @@
             "id": "eee0bb3775bcf57a",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "zh/part-1-foundations/03-prompt-to-chat-completion/from-prompt-to-chat-completion.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "from-prompt-to-chat-completion"
             }
           }
         ]
@@ -181,6 +185,12 @@
   },
   "active": "eee0bb3775bcf57a",
   "lastOpenFiles": [
+    "zh/part-2-agent-basics/04-basic-chat/build-a-basic-chat-agent.md",
+    "zh/part-1-foundations/03-prompt-to-chat-completion/from-prompt-to-chat-completion.md",
+    "zh/part-1-foundations/01-what-is-ai-agent/what-is-an-ai-agent.md",
+    "zh/part-1-foundations/02-llm-fundamentals/llm-fundamentals.md",
+    "zh/part-1-foundations/00-preface/before-we-begin.md",
+    "zh/part-2-agent-basics/06-function-calling/function-calling.md",
     "zh/part-4-ai-coding/AI 时代，来自程序员送给非程序员的一封情书.md",
     "zh/part-3-agent-core/07-context-engineering/context-management.md",
     "zh/part-3-agent-core/07-context-engineering/context-engineering.md",
@@ -189,7 +199,6 @@
     "zh/part-4-ai-coding",
     "zh/part-3-agent-core/09-multi-agent/multi-agent.md",
     "zh/README.md",
-    "zh/part-2-agent-basics/06-function-calling/function-calling.md",
     "README.md",
     "zh/part-3-agent-core/08-evolution/evaluation.md",
     "zh/part-2-agent-basics/05-message-prompt-state/message-prompt-and-state.md",
@@ -214,11 +223,6 @@
     "en/part-3-agent-core/README.md",
     "zh/part-3-agent-core/README.md",
     "en/part-2-agent-basics/README.md",
-    "zh/part-2-agent-basics/README.md",
-    "en/part-1-foundations/README.md",
-    "zh/part-1-foundations/README.md",
-    "zh/part-1-foundations/foundations-overview.md",
-    "zh/part-1-foundations/00-preface/before-we-begin.md",
     "en/part-3-agent-core/12-multi-agent/images/img.png",
     "en/part-1-foundations/02-llm-fundamentals/images/10-residual-connection-gradient-flow.png",
     "en/part-1-foundations/02-llm-fundamentals/images/07-feed-forward-network.png",
