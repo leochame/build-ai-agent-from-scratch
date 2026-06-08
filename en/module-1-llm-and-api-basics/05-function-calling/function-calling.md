@@ -1,4 +1,4 @@
-# 06. Function Calling / Tool Use / MCP
+# 05. Function Calling / Tool Use / MCP
 
 This chapter introduces how models call tools and how external capabilities can be connected to an agent.
 

@@ -1,4 +1,4 @@
-# 06. Function Calling / Tool Use / MCP
+# 05. Function Calling / Tool Use / MCP
 
 本章会介绍模型如何调用工具，以及如何把外部能力接入 Agent。
 

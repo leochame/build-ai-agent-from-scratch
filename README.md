@@ -1,30 +1,50 @@
 # Build AI Agent From Scratch
 
-这个仓库现在已经整理为中英文双语结构：
+A bilingual (Chinese & English) learning journal about building AI agents from the ground up.
 
 - [中文目录](./zh/README.md)
 - [English Index](./en/README.md)
 
-## 目录结构
+## Current Learning Map
 
 ```text
 zh/
-  part-1-foundations/
-  part-2-agent-basics/
-  part-3-agent-core/
+  module-0-preface/
+  module-1-llm-and-api-basics/
+    01-what-is-ai-agent/
+    02-llm-fundamentals/
+    03-prompt-cache/
+    04-prompt-to-chat-completion/
+    05-function-calling/
+  module-2-agent-loop/
+  module-3-context-engineering/
+  module-4-harness-engineering/
+  module-5-eval-benchmark/
+  module-6-future-directions/
+    09-multi-agent/
+    10-thoughts-on-agents/
 
 en/
-  part-1-foundations/
-  part-2-agent-basics/
-  part-3-agent-core/
+  module-0-preface/
+  module-1-llm-and-api-basics/
+    01-what-is-ai-agent/
+    02-llm-fundamentals/
+    03-prompt-cache/
+    04-prompt-to-chat-completion/
+    05-function-calling/
+    06-basic-chat/
+  module-2-agent-loop/
+  module-3-context-engineering/
+  module-4-harness-engineering/
+  module-5-eval-benchmark/
+  module-6-future-directions/
+    09-multi-agent/
+    10-thoughts-on-agents/
 ```
 
-说明：
+- `zh/` — Chinese version
+- `en/` — English version
+- Each article's images are stored alongside its Markdown file
+- The Chinese index is currently the source of truth for the latest module split.
 
-- `zh/` 存放中文版本
-- `en/` 存放英文版本
-- 每个语言目录下只保留 3 个 Part
-- 每篇文章的图片文件夹与对应 Markdown 同级存放
-
-如果你想从中文开始读，直接进入 [zh/README.md](./zh/README.md)。  
-If you want the English version, start from [en/README.md](./en/README.md).
+Start reading in [Chinese](./zh/README.md) or [English](./en/README.md).
