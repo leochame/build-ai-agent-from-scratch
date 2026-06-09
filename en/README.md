@@ -37,11 +37,17 @@ This module focuses on the real engineering constraints behind agent systems: co
 
 - [08. Evaluation](./module-5-eval-benchmark/evaluation.md)
 
-## Module 6 Future Directions And Complex Systems
+## Module 6 Agent Features
 
-- [09. Multi-Agent](./module-6-future-directions/09-multi-agent/multi-agent.md)
-- [Agent Team](./module-6-future-directions/09-multi-agent/agent-team.md)
-- [10. Thoughts on Agents](./module-6-future-directions/10-thoughts-on-agents/thoughts-on-agents.md)
+- [Dream](./module-6-agent-features/01-dream/dream.md)
+- [Task And Proactivity](./module-6-agent-features/02-task-and-proactivity/task-and-proactivity.md)
+- [Agent Team](./module-6-agent-features/03-agent-team/agent-team.md)
+- [Deep Research](./module-6-agent-features/04-deep-research/deep-research.md)
+
+## Module 7 Complex Systems And Thoughts
+
+- [09. Multi-Agent](./module-7-complex-systems-and-thoughts/09-multi-agent/multi-agent.md)
+- [10. Thoughts on Agents](./module-7-complex-systems-and-thoughts/10-thoughts-on-agents/thoughts-on-agents.md)
 
 Suggested reading order:
 
@@ -52,3 +58,5 @@ Suggested reading order:
 5. [AgentLoop](./module-2-agent-loop/README.md) (not written yet)
 6. [07. Context Engineering](./module-3-context-engineering/context-engineering.md)
 7. [08. Evaluation](./module-5-eval-benchmark/evaluation.md)
+8. [Agent Team](./module-6-agent-features/03-agent-team/agent-team.md)
+9. [09. Multi-Agent](./module-7-complex-systems-and-thoughts/09-multi-agent/multi-agent.md)

@@ -14,13 +14,18 @@ zh/
     01-what-is-ai-agent/
     02-llm-fundamentals/
     03-prompt-cache/
-    04-prompt-to-chat-completion/
+    04-prompt-to-responses-api/
     05-function-calling/
   module-2-agent-loop/
   module-3-context-engineering/
   module-4-harness-engineering/
   module-5-eval-benchmark/
-  module-6-future-directions/
+  module-6-agent-features/
+    01-dream/
+    02-task-and-proactivity/
+    03-agent-team/
+    04-deep-research/
+  module-7-complex-systems-and-thoughts/
     09-multi-agent/
     10-thoughts-on-agents/
 
@@ -37,7 +42,12 @@ en/
   module-3-context-engineering/
   module-4-harness-engineering/
   module-5-eval-benchmark/
-  module-6-future-directions/
+  module-6-agent-features/
+    01-dream/
+    02-task-and-proactivity/
+    03-agent-team/
+    04-deep-research/
+  module-7-complex-systems-and-thoughts/
     09-multi-agent/
     10-thoughts-on-agents/
 ```

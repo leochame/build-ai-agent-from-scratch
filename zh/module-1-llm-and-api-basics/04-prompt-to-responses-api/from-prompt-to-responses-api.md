@@ -1,4 +1,4 @@
-# 03. From Prompt To Chat Completion
+# 04. From Prompt To Responses API
 
 前面我们已经从模型结构、token、上下文窗口和 Prompt Cache 的角度理解了 LLM。到这里，我们要开始进入 Agent 开发的第一层工程抽象：一次模型调用到底长什么样。
 
@@ -20,7 +20,7 @@ messages / input items -> model -> output items
 
 这就是本章要讲的事情。
 
-OpenAI 现在推荐新项目使用 Responses API 来做文本生成、工具调用和更复杂的 agentic workflow。历史上大家经常说的 Chat Completions Format，核心思想仍然非常重要：不要只把输入看成一整段字符串，而要把它看成一组带有角色和语义的消息。
+OpenAI 现在推荐新项目使用 Responses API 来做文本生成、工具调用和更复杂的 agentic workflow。历史上的 Completions API 已经属于 legacy 接口，并在 OpenAI 平台中逐步让位给更新的 API 形态。你可能还会在老教程里看到 Chat Completions Format，它的核心思想仍然非常重要：不要只把输入看成一整段字符串，而要把它看成一组带有角色和语义的消息。
 
 本章先不急着写 AgentLoop。我们先把一次模型调用看清楚。
 
@@ -45,7 +45,6 @@ console.log(response.output_text);
 
 如果你只是写一个玩具程序，这已经够了。但在真实应用里，我们通常还需要控制模型的行为，比如：
 
-- 用什么语气回答；
 - 哪些事情不能做；
 - 输出格式必须是什么；
 - 用户输入和系统规则冲突时听谁的；
@@ -66,7 +65,7 @@ console.log(response.output_text);
 const response = await client.responses.create({
   model: "gpt-5.5",
   instructions: "你是一个面向初学者的 AI Agent 开发老师。回答要简洁、具体、少用术语。",
-  input: "什么是 Chat Completion？",
+  input: "什么是 Responses API？",
 });
 ```
 
@@ -90,7 +89,7 @@ const response = await client.responses.create({
     },
     {
       role: "user",
-      content: "什么是 Chat Completion？",
+      content: "什么是 Responses API？",
     },
   ],
 });
@@ -98,17 +97,12 @@ const response = await client.responses.create({
 console.log(response.output_text);
 ```
 
-这就是从 prompt 走向 chat completion 的关键变化：
+这就是从 prompt 走向 Responses API 输入结构的关键变化：
 
 ```text
-一整段文本
+一整段文本 -> 一组有 role 的 message
 ```
 
-变成：
-
-```text
-一组有 role 的 message
-```
 
 在这个格式里，常见角色包括：
 
@@ -116,7 +110,7 @@ console.log(response.output_text);
 - `user`：终端用户提供的问题、请求和输入；
 - `assistant`：模型生成的回复。
 
-你可以把 `developer` message 想成函数定义，把 `user` message 想成函数参数。
+你可以把 `developer message` 想成函数定义，把 `user message` 想成函数参数。
 
 ```text
 developer message: 这个系统应该怎么工作
@@ -126,31 +120,6 @@ assistant message: 模型根据前两者生成的结果
 
 这种类比不完美，但对刚开始写 Agent 很有用。
 
-## Chat Completion 的真正含义
-
-“Completion” 这个词容易让人误会。它不是说模型真的理解了一个完整任务，然后一次性完成所有事情。更准确地说，模型是在给定上下文后，继续生成接下来最可能、最符合指令的输出。
-
-在传统 completion 里，输入更像一段待续写文本：
-
-```text
-请补全下面这段话：
-AI Agent 是一种...
-```
-
-在 chat completion 里，输入变成了对话历史：
-
-```text
-developer: 你是一个 AI Agent 开发老师。
-user: 什么是 AgentLoop？
-assistant: AgentLoop 是...
-user: 那它和普通聊天有什么区别？
-```
-
-模型看到的不是“最后一句话”，而是整个被传入的上下文。它根据这些 message 继续生成下一条 `assistant` message。
-
-所以，Chat Completion 的核心不是“聊天界面”，而是“用消息序列组织模型上下文”。
-
-这件事是 Agent 的基础。因为 AgentLoop 本质上也是不断构造上下文、调用模型、处理输出、再把新信息放回上下文。
 
 ## Output 也不只是字符串
 
@@ -182,7 +151,149 @@ input items -> model -> output items
 
 工具调用也是 output 的一种。
 
-这也是为什么我们后面讲 Function Calling 和 AgentLoop 时，会不断强调“解析模型输出”，而不是只说“拿到回答”。
+这也是为什么我们后面讲 AgentLoop 时，会不断强调“解析模型输出”，而不是只说“拿到回答”。
+
+## Tool Call 也是一种 Output
+
+Function Calling 听起来像一个独立功能，但从 Responses API 的角度看，它更适合被理解成一种模型输出。
+
+模型并不会真的在自己的大脑里执行函数。它做的是：在当前上下文里判断“我需要外部世界的信息或动作”，然后输出一个 tool call。应用拿到这个 tool call 之后，负责真正执行对应工具，再把工具结果放回下一轮模型输入。
+
+这里要注意一个格式边界：`tools` 不是一条 message。它不是放在 `input` 数组里的 `developer`、`user` 或 `assistant` 消息，而是作为这次模型调用请求里的 `tools` 参数传给模型。
+
+比如用户问：
+
+```text
+帮我看看当前目录下有哪些文件。
+```
+
+第一轮请求可以简化成：
+
+```json
+{
+  "input": [
+    {
+      "role": "developer",
+      "content": "你是一个可以使用工具完成任务的 Agent。需要外部信息时，先调用工具，不要编造结果。"
+    },
+    {
+      "role": "user",
+      "content": "帮我看看当前目录下有哪些文件。"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "name": "list_files",
+      "description": "列出目录下的文件。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "要读取的目录路径。"
+          }
+        },
+        "required": ["path"]
+      }
+    }
+  ]
+}
+```
+
+模型本身不能直接读取你的文件系统。但因为这次请求里有 `tools`，模型知道它可以通过 `list_files` 请求应用帮它读取目录。
+
+这时模型可能不会直接回答，而是在 `output` 里返回一个 tool call：
+
+```json
+[
+  {
+    "type": "function_call",
+    "call_id": "call_123",
+    "name": "list_files",
+    "arguments": "{\"path\":\".\"}"
+  }
+]
+```
+
+这里的 tool call 仍然只是模型 output 的一部分。它的意思不是“模型已经读取了文件”，而是：
+
+```text
+请应用帮我调用 list_files，参数是 path = "."
+```
+
+应用真正执行 `list_files` 之后，得到结果：
+
+```json
+["README.md", "package.json", "src"]
+```
+
+第二轮请求时，应用要把上一轮的 tool call 和这次的工具结果放回 `input`：
+
+```json
+{
+  "input": [
+    {
+      "role": "developer",
+      "content": "你是一个可以使用工具完成任务的 Agent。需要外部信息时，先调用工具，不要编造结果。"
+    },
+    {
+      "role": "user",
+      "content": "帮我看看当前目录下有哪些文件。"
+    },
+    {
+      "type": "function_call",
+      "call_id": "call_123",
+      "name": "list_files",
+      "arguments": "{\"path\":\".\"}"
+    },
+    {
+      "type": "function_call_output",
+      "call_id": "call_123",
+      "output": "[\"README.md\",\"package.json\",\"src\"]"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "name": "list_files",
+      "description": "列出目录下的文件。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          }
+        },
+        "required": ["path"]
+      }
+    }
+  ]
+}
+```
+
+这里的 `call_id` 用来把 `function_call_output` 和前面的 `function_call` 对应起来。真正进入对话上下文、让模型知道“刚才工具执行完了”的，是 `function_call_output`。
+
+现在模型已经能看到工具结果，于是可以生成最终回复：
+
+```json
+[
+  {
+    "role": "assistant",
+    "content": "当前目录下有 README.md、package.json 和 src。"
+  }
+]
+```
+
+所以，Function Calling 的关键不是“模型会调用函数”，而是：
+
+- 模型可以用结构化 output 表达工具调用意图；
+- `tools` 是模型调用请求的一部分，不是 message；
+- 应用负责执行工具；
+- 工具结果要以 `function_call_output` 回到下一轮 `input`；
+- 模型基于工具结果继续生成文本或继续请求工具。
+
+这正是 AgentLoop 的雏形。
 
 ## 多轮对话不是模型自己记住了
 
@@ -216,11 +327,8 @@ const response = await client.responses.create({
 });
 ```
 
-这段代码背后的思想非常重要：
 
-对话状态不在模型身体里，而在你的应用里。
-
-你的应用负责决定：
+对话状态不在模型身体里，而在我们的应用里，我们的应用负责决定：
 
 - 哪些历史要保留；
 - 哪些历史要丢弃；
@@ -228,7 +336,7 @@ const response = await client.responses.create({
 - 哪些规则每次都要重新放进去；
 - 哪些工具结果要进入下一轮上下文。
 
-这就是后面 Message、Prompt、State 章节要展开的内容。
+这个也是上下文工程要展开讲的内容。
 
 ## 最小聊天程序的形状
 
@@ -290,49 +398,6 @@ while (true) {
 -> 等待下一轮用户输入
 ```
 
-注意，这还不是 AgentLoop。
-
-它只是 Chat Loop。
-
-Chat Loop 只负责对话。AgentLoop 还要在模型输出之后判断：模型是不是要调用工具？工具结果是什么？是否需要继续推理？任务是否完成？是否需要向用户汇报？
-
-## 为什么这一章是 AgentLoop 的前置知识
-
-AgentLoop 看起来比聊天复杂很多，但它的核心仍然建立在这几个概念上：
-
-- message 是上下文的基本单位；
-- role 决定了不同消息的来源和优先级；
-- 应用负责维护状态，而不是指望模型自动记忆；
-- 模型输出可能是文本，也可能是工具调用；
-- 每一轮模型调用都要重新组织输入。
-
-如果你理解了从 prompt 到 message，再从 message 到一次模型 response 的过程，AgentLoop 就不神秘了。
-
-它只是把这个过程放进一个循环里：
-
-```text
-构造上下文
--> 调用模型
--> 解析输出
--> 执行动作
--> 记录结果
--> 再次构造上下文
-```
-
-这也是 Codex 这类代码 Agent 的基本运行方式。它不是一次 prompt 就把软件工程任务全部完成，而是在一次次模型调用、工具执行、状态更新和结果观察之间循环前进。
-
-## 本章小结
-
-从 prompt 到 chat completion，其实是从“写一句话给模型”走向“用结构化消息组织上下文”。
-
-这一章你需要记住四件事：
-
-- prompt 不只是用户输入，也包括开发者规则和上下文；
-- message 用 `role` 区分不同来源和权重；
-- assistant 的回复也要进入历史，才能形成多轮对话；
-- output 不一定只有文本，后面工具调用也会以输出项的形式出现。
-
-下一章会进入 Function Calling / Tool Use / MCP。等你理解模型如何表达工具调用意图之后，再进入真正的 AgentLoop。
 
 ## 参考资料
 
