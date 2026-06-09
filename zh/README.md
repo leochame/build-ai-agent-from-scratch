@@ -53,7 +53,7 @@
 这一模块放 Agent 产品里的重要 feature。Dream、主动性、Task、Agent Team 和 Deep Research 都不应该被理解成“未来方向”，它们是 Agent 能不能真正持续工作的关键能力。
 
 - [Dream](./module-6-agent-features/01-dream/dream.md)
-- [Task And Proactivity](./module-6-agent-features/02-task-and-proactivity/task-and-proactivity.md)
+- [Task And Proactivity](module-6-agent-features/02-proactivity/task)
 - [Agent Team](./module-6-agent-features/03-agent-team/agent-team.md)
 - [Deep Research](./module-6-agent-features/04-deep-research/deep-research.md)
 
@@ -64,7 +64,7 @@
 多智能体暂时放在这一模块里，而不是主线起点。因为我现在还没有一个足够清晰的多智能体认知。它为什么有用，至少有一个很重要的原因：Gemini、Anthropic 和 OpenAI 都认同一个方向，多智能体系统有效，主要是因为它们能帮助智能体消耗足够的 token 去解决问题。
 
 - [09. Multi-Agent](./module-7-complex-systems-and-thoughts/09-multi-agent/multi-agent.md)
-- [10. 我对 Agent 的思考](./module-7-complex-systems-and-thoughts/10-thoughts-on-agents/thoughts-on-agents.md)
+- [10. 我对 Agent 的思考](module-7-complex-systems-and-thoughts/01-thoughts-on-agents/thoughts-on-agents.md)
 - [AI 时代，来自程序员送给非程序员的一封情书](./module-7-complex-systems-and-thoughts/AI%20时代，来自程序员送给非程序员的一封情书.md)
 
 ## 推荐阅读顺序
@@ -78,7 +78,7 @@
 7. [Harness Engineering](./module-4-harness-engineering/README.md)（待写）
 8. [08. Evaluation](./module-5-eval-benchmark/evaluation.md)
 9. [Dream](./module-6-agent-features/01-dream/dream.md)
-10. [Task And Proactivity](./module-6-agent-features/02-task-and-proactivity/task-and-proactivity.md)
+10. [Task And Proactivity](module-6-agent-features/02-proactivity/task)
 11. [Agent Team](./module-6-agent-features/03-agent-team/agent-team.md)
 12. [Deep Research](./module-6-agent-features/04-deep-research/deep-research.md)
 13. [09. Multi-Agent](./module-7-complex-systems-and-thoughts/09-multi-agent/multi-agent.md)
