@@ -109,42 +109,16 @@ Context Engineer 管理的，就是从所有潜在信息里，挑出当前最值
 
 ### 3.3 Code Act
 
-在 coding agent 里，`Code Act` 也是很典型的 pre-handle 问题。
+在 agent 里，`Code Act` 也是很典型的 pre-handle 操作。
 
-如果一个任务涉及多步骤操作，比如先获得某个 excel，然后进行函数上的统计。这么固定明确的多步骤操作其实就可以成为 CodeAct，让一串 code 去执行这么一连串的操作。而非完成一步塞到上下文中，完成一步骤塞到上下文中。
+如果一个任务涉及多步骤操作，而且这些步骤的执行路径比较明确，比如先读取某个 excel，再做清洗、分组、统计、排序，最后输出一个摘要表。那么，这个多步骤操作就不一定要拆成多次工具调用，每一步都把中间结果塞回上下文。更好的方式是让模型生成一段代码，把这一串操作放到沙箱里一次性执行，只把最终结果、异常信息或少量关键中间状态返回给模型。
 
-对于更复杂的任务或需要大规模数据处理的场景，它会启用「Codex 模式」，在代码沙箱里生成并运行脚本。这样，代理可以在运行时内存里处理大批量数据，只把真正相关的最终结果返回给模型，相比「只写代码、不用工具」的方式，这种模式具有更好的执行控制能力和效率。
+这就是 CodeAct 的核心价值：把「可程序化的操作」,转化为在代码沙箱里生成并运行的脚本。进行循环、过滤、计算、文件读写、批量请求、数据转换等确定性强的操作。这样，代理可以在运行时内存里处理大批量数据，只把真正相关的最终结果返回给模型。
+
+它不太适合完全开放式、强依赖人类判断、每一步都需要重新推理方向的任务，这类任务仍然更适合让模型在上下文中逐步推理。
 
 
 
-### 3.5. SubAgent
-
-- **在多个 Agent 之间拆分上下文负载**（参考：[Drew 的文章](https://www.dbreunig.com/2025/06/26/how-to-fix-your-context.html)、[Anthropic 多 Agent 系统](https://www.anthropic.com/engineering/built-multi-agent-research-system)）。
-
-但这里也有不少坑（参考：[Cognition](https://cognition.ai/blog/dont-build-multi-agents#a-theory-of-building-long-running-agents)、[Walden Yan](https://x.com/jxnlco/status/1945490018127987092)）：
-
-- Multi Agent System 很容易做出互相冲突的决策（原因见上面同一批参考）。
-- 子 Agent 在设计上最好避免直接做高风险决策，而是把重心放在检索、分析、信息收集等工作上（参考：[open-deep-research](https://github.com/langchain-ai/open_deep_research)）。
-
-换句话说：在 Agent 之间隔离上下文，以减少单一上下文的负担；但在决策层面尽量集中控制，避免系统整体陷入混乱。
-
-在多智能体协同中，可以粗略区分两类协作模式：
-- 只需要简单委派的任务，更偏向「Communication」；
-- 与历史高度相关、依赖长期记忆的子任务，则更强调在 Agent 之间「Share Context」。
-
----
-
-常见的实现比如说是在 search result 这种 token 量很大的工具输出，一方面需要防止上下文膨胀，另一方面又需要保证信息可访问
-
-那么，这时候可以用一个分层策略，按任务复杂度区分处理方式：
-
-- **复杂任务：** 使用 **sub-agents（或 “agent-as-a-tool”）**，并为其定义固定的输出 Schema。
-  这样可以把复杂的工作流封装在子 Agent 内部，只把结构化的、必要的结果返回给主 Agent。
-
-- **简单任务：** 在一开始可以直接返回完整细节，但**在后续阶段进行压缩（compress）**：
-  把原始数据卸载到 external state（比如 File System 或 URL 等），在对话上下文中只保留唯一标识符（ID）。
-
-- **信息持久化：** 明确指示模型把中间洞见和关键发现记录到文件中。即使之后对话历史被压缩或裁剪，这些关键信息仍能通过文件被重新加载回来。
 
 ## 4. Post-handle
 
