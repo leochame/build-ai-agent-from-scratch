@@ -7,9 +7,9 @@
 ## 推荐阅读顺序
 
 1. [前言](./module-0-preface/before-we-begin.md)
-2. [01. LLM Fundamentals](./module-1-llm-and-api-basics/01-llm-fundamentals/llm-fundamentals.md)
-3. [02. Prompt Cache](./module-1-llm-and-api-basics/02-prompt-cache/prompt-cache.md)
-4. [03. From Prompt To Responses API](./module-1-llm-and-api-basics/03-prompt-to-responses-api/from-prompt-to-responses-api.md)
+2. [02. LLM Fundamentals](module-1-llm-and-api-basics/01-llm-fundamentals/llm-fundamentals.md)
+3. [03. Prompt Cache](module-1-llm-and-api-basics/02-prompt-cache/prompt-cache.md)
+4. [04. From Prompt To Responses API](module-1-llm-and-api-basics/03-prompt-to-responses-api/from-prompt-to-responses-api.md)
 5. [05. AgentLoop](./module-2-agent-loop/01-agent-loop/agent-loop.md)
 6. [07. Context Engineering](./module-3-context-engineering/01-context-engineering/context-engineering.md)
 7. [08. Evaluation](./module-5-eval-benchmark/01-evaluation-system/01-evaluation-system.md)
@@ -23,9 +23,10 @@
 
 ### Module 1 LLM 与 API 基础
 
-- [01. LLM Fundamentals](./module-1-llm-and-api-basics/01-llm-fundamentals/llm-fundamentals.md)
-- [02. Prompt Cache](./module-1-llm-and-api-basics/02-prompt-cache/prompt-cache.md)
-- [03. From Prompt To Responses API](./module-1-llm-and-api-basics/03-prompt-to-responses-api/from-prompt-to-responses-api.md)
+- [01. What Is AI Agent](./module-1-llm-and-api-basics/01-what-is-ai-agent/what-is-an-ai-agent.md)
+- [02. LLM Fundamentals](module-1-llm-and-api-basics/01-llm-fundamentals/llm-fundamentals.md)
+- [03. Prompt Cache](module-1-llm-and-api-basics/02-prompt-cache/prompt-cache.md)
+- [04. From Prompt To Responses API](module-1-llm-and-api-basics/03-prompt-to-responses-api/from-prompt-to-responses-api.md)
 
 ### Module 2 AgentLoop
 
