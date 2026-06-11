@@ -1,62 +1,54 @@
-# English Index
+# Build AI Agent From Scratch English Edition
 
-This directory contains the English edition, organized by the same module map as the Chinese edition.
+This directory contains the English edition of the repository.
 
-## Module 0 Preface
+It is not a strictly linear tutorial. It is closer to an evolving self-study path for learning how to build AI agents. I recommend reading the main path first so you can build a basic mental model for LLMs, APIs, Agent Loop, Context Engineering, and Evaluation. After that, you can explore the remaining topics in any order.
 
-- [00. Preface](./module-0-preface/before-we-begin.md)
+## Suggested Reading Order
 
-## Module 1 LLM And API Basics
+1. [01. LLM Fundamentals](./module-1-llm-and-api-basics/01-llm-fundamentals/llm-fundamentals.md)
+2. [02. Prompt Cache](./module-1-llm-and-api-basics/02-prompt-cache/prompt-cache.md)
+3. [03. From Prompt To Responses API](./module-1-llm-and-api-basics/03-prompt-to-responses-api/from-prompt-to-responses-api.md)
+4. [05. AgentLoop](./module-2-agent-loop/01-agent-loop/agent-loop.md)
+5. [07. Context Engineering](./module-3-context-engineering/01-context-engineering/context-engineering.md)
+6. [08. Evaluation](./module-5-eval-benchmark/01-evaluation-system/evaluation-system.md)
+7. The rest can be read in any order
 
-This module covers the basic mental model for LLMs and the API-level concepts that make agent development possible.
+## Table Of Contents
 
-- [01. What Is an AI Agent](./module-1-llm-and-api-basics/01-what-is-ai-agent/what-is-an-ai-agent.md)
-- [02. LLM Fundamentals](./module-1-llm-and-api-basics/02-llm-fundamentals/llm-fundamentals.md)
-- [03. Prompt Cache](./module-1-llm-and-api-basics/03-prompt-cache/README.md) (not translated yet)
-- [04. From Prompt to Chat Completion](./module-1-llm-and-api-basics/04-prompt-to-chat-completion/from-prompt-to-chat-completion.md)
-- [05. Function Calling / Tool Use / MCP](./module-1-llm-and-api-basics/05-function-calling/function-calling.md)
-- [06. Basic Chat](./module-1-llm-and-api-basics/06-basic-chat/build-a-basic-chat-agent.md)
+### Module 1 LLM And API Basics
 
-## Module 2 AgentLoop
+- [01. LLM Fundamentals](./module-1-llm-and-api-basics/01-llm-fundamentals/llm-fundamentals.md)
+- [02. Prompt Cache](./module-1-llm-and-api-basics/02-prompt-cache/prompt-cache.md)
+- [03. From Prompt To Responses API](./module-1-llm-and-api-basics/03-prompt-to-responses-api/from-prompt-to-responses-api.md)
 
-- [AgentLoop](./module-2-agent-loop/README.md) (not written yet)
+### Module 2 AgentLoop
 
-## Module 3 Context Engineering
+- [05. AgentLoop](./module-2-agent-loop/01-agent-loop/agent-loop.md)
 
-This module focuses on the real engineering constraints behind agent systems: context, memory, retrieval, compression, and reliability.
+### Module 3 Context Engineering
 
-- [07. Context Engineering](./module-3-context-engineering/context-engineering.md)
-- [Context Management](./module-3-context-engineering/context-management.md)
-- [Context Compact](./module-3-context-engineering/context-compact.md)
+- [07. Context Engineering](./module-3-context-engineering/01-context-engineering/context-engineering.md)
 
-## Module 4 Harness Engineering
+### Module 4 Harness Engineering
 
-- [Harness Engineering](./module-4-harness-engineering/README.md) (not written yet)
+- [Harness Engineering](./module-4-harness-engineering/harness-engineering.md)
 
-## Module 5 Eval And Benchmark
+### Module 5 Eval And Benchmark
 
-- [08. Evaluation](./module-5-eval-benchmark/evaluation.md)
+- [08. Evaluation](./module-5-eval-benchmark/01-evaluation-system/evaluation-system.md)
+- [Log System](./module-5-eval-benchmark/02-log-system/log-system.md)
 
-## Module 6 Agent Features
+### Module 6 Agent Features
 
 - [Dream](./module-6-agent-features/01-dream/dream.md)
-- [Task And Proactivity](./module-6-agent-features/02-task-and-proactivity/task-and-proactivity.md)
-- [Agent Team](./module-6-agent-features/03-agent-team/agent-team.md)
+- [Task And Proactivity](./module-6-agent-features/02-proactivity/task.md)
+- [Agent Team](./module-6-agent-features/03-multi-agents/agent-team/agent-team.md)
+- [Multi-Agent](./module-6-agent-features/03-multi-agents/multi-agent.md)
 - [Deep Research](./module-6-agent-features/04-deep-research/deep-research.md)
+- [Computer Use](./module-6-agent-features/05-computer-use/computer-use.md)
 
-## Module 7 Complex Systems And Thoughts
+### Module 7 Complex Systems And Thoughts
 
-- [09. Multi-Agent](./module-7-complex-systems-and-thoughts/09-multi-agent/multi-agent.md)
-- [10. Thoughts on Agents](./module-7-complex-systems-and-thoughts/10-thoughts-on-agents/thoughts-on-agents.md)
-
-Suggested reading order:
-
-1. [Preface](./module-0-preface/before-we-begin.md)
-2. [02. LLM Fundamentals](./module-1-llm-and-api-basics/02-llm-fundamentals/llm-fundamentals.md)
-3. [04. From Prompt to Chat Completion](./module-1-llm-and-api-basics/04-prompt-to-chat-completion/from-prompt-to-chat-completion.md)
-4. [05. Function Calling / Tool Use / MCP](./module-1-llm-and-api-basics/05-function-calling/function-calling.md)
-5. [AgentLoop](./module-2-agent-loop/README.md) (not written yet)
-6. [07. Context Engineering](./module-3-context-engineering/context-engineering.md)
-7. [08. Evaluation](./module-5-eval-benchmark/evaluation.md)
-8. [Agent Team](./module-6-agent-features/03-agent-team/agent-team.md)
-9. [09. Multi-Agent](./module-7-complex-systems-and-thoughts/09-multi-agent/multi-agent.md)
+- [Thoughts On Agents](./module-7-complex-systems-and-thoughts/01-thoughts-on-agents/thoughts-on-agents.md)
+- [How To Start AI Coding](./module-7-complex-systems-and-thoughts/how-to-start-ai-coding.md)

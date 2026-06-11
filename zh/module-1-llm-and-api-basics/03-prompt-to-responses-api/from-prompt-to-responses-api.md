@@ -1,6 +1,6 @@
 # 04. From Prompt To Responses API
 
-前面我们已经从模型结构、token、上下文窗口和 Prompt Cache 的角度理解了 LLM。到这里，我们要开始进入 Agent 开发的第一层工程抽象：一次模型调用到底长什么样。
+前面我们已经从模型结构、token、上下文窗口和 Prompt Cache 的角度理解了 LLM。到这里，我们要开始 Agent 开发的第一步：一次模型调用到底长什么样。
 
 很多人第一次接触 LLM API 时，会把它想象成：
 
@@ -18,9 +18,8 @@ prompt -> model -> answer
 messages / input items -> model -> output items
 ```
 
-这就是本章要讲的事情。
 
-OpenAI 现在推荐新项目使用 Responses API 来做文本生成、工具调用和更复杂的 agentic workflow。历史上的 Completions API 已经属于 legacy 接口，并在 OpenAI 平台中逐步让位给更新的 API 形态。你可能还会在老教程里看到 Chat Completions Format，它的核心思想仍然非常重要：不要只把输入看成一整段字符串，而要把它看成一组带有角色和语义的消息。
+> OpenAI 现在推荐新项目使用 Responses API 来做文本生成、工具调用和更复杂的 agentic workflow。历史上的 Completions API 已经属于 legacy 接口，并在 OpenAI 平台中逐步让位给更新的 API 形态。你可能还会在老教程里看到 Chat Completions Format，它的核心思想仍然非常重要：不要只把输入看成一整段字符串，而要把它看成一组带有角色和语义的消息。
 
 本章先不急着写 AgentLoop。我们先把一次模型调用看清楚。
 
