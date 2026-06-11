@@ -1,9 +1,5 @@
 # Build AI Agent From Scratch English Edition
 
-This directory contains the English edition of the repository.
-
-It is not a strictly linear tutorial. It is closer to an evolving self-study path for learning how to build AI agents. I recommend reading the main path first so you can build a basic mental model for LLMs, APIs, Agent Loop, Context Engineering, and Evaluation. After that, you can explore the remaining topics in any order.
-
 ## Suggested Reading Order
 
 1. [01. LLM Fundamentals](./module-1-llm-and-api-basics/01-llm-fundamentals/llm-fundamentals.md)
